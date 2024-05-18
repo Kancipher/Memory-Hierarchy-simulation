@@ -9,17 +9,6 @@ struct CacheLine
     
 
 };
-enum WritePolicy
-{
-    WriteBack,
-    WriteThrough
-};
-enum ReplacementPolicy
-{
-    Allocate,
-    Around
-};
-
 class Cache
 {
 private:
@@ -35,8 +24,6 @@ private:
     unsigned int displacementBits;
     unsigned int tagBits;
     unsigned int cycles;
-    WritePolicy writePolicy;
-    ReplacementPolicy replacementPolicy;
     vector<CacheLine> cache;
     
     unsigned int getIndex(unsigned int address);
@@ -44,7 +31,7 @@ private:
 
 public:
     Cache(unsigned int cacheSize, unsigned int lineSize, unsigned int cacheAccessTime);
-    void access(unsigned int address,bool write);
+    void access(unsigned int address);
     void printStatus();
     float getHitRatio();
     float getMissRatio();
